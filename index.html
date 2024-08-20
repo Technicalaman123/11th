@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stylish Pin Lock</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <h1>Welcome to </h1>
+    <h1>TECHNICAL AMAN </h1>
+    <h3>Programs</h3>
+    <p1>Password: 2580</p1>
+    <style>
+        body {
+            background-color: #fff;
+            transition: background-color 1s;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        .pin-input {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            text-align: center;
+            margin: 10px;
+        }
+        input[type="submit"] {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter 4-digit Pin</h1>
+    <form id="pinForm">
+        <input class="pin-input" type="number" id="digit1" maxlength="1" min="0" max="9" required>
+        <input class="pin-input" type="number" id="digit2" maxlength="1" min="0" max="9" required>
+        <input class="pin-input" type="number" id="digit3" maxlength="1" min="0" max="9" required>
+        <input class="pin-input" type="number" id="digit4" maxlength="1" min="0" max="9" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <p id="message"></p>
+
+    <script>
+        document.getElementById("pinForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var digit1 = document.getElementById("digit1").value;
+            var digit2 = document.getElementById("digit2").value;
+            var digit3 = document.getElementById("digit3").value;
+            var digit4 = document.getElementById("digit4").value;
+            var enteredPin = digit1 + digit2 + digit3 + digit4;
+
+            if (enteredPin === "2580") {
+                document.getElementById("message").innerHTML = "Correct Pin! Access granted.";
+                document.body.style.backgroundColor = "blue"; // Change background color to blue
+                // Redirect to index2.html after a short delay
+                setTimeout(function() {
+                    window.location.href = "index2.html"; // Change this to your desired URL
+                }, 1000); // Delay for 1 second (1000 milliseconds)
+            } else {
+                document.getElementById("message").innerHTML = "Incorrect Pin. Try again.";
+                document.getElementById("pinForm").reset();
+            }
+        });
+    </script>
+</body>
+</html>

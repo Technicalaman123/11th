@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11th Attendence (Date 00/00/2024) </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>HIRAKUD, HIGHER SECONDARY SCHOOL, HIRAKUD</h1>
+        <div class="input-container">
+            <label for="class">Class:</label>
+            <input type="text" id="class" placeholder="11th (Commerce)">
+            <label for="date">Date:</label>
+            <input type="date" id="date">
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>SR. No</th>
+                    <th>Student Name</th>
+                    <th>Roll No.</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="studentTable">
+                <!-- Student rows will be added here -->
+            </tbody>
+        
+
+        </table>
+        <button id="addRow">Add Student</button>
+        <div class="total">
+            Total Students: <span id="totalStudents">0</span>
+            <button id="doneButton">Done</button>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
