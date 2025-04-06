@@ -39,5 +39,23 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+function blockIfInWebView() {
+    const ua = navigator.userAgent.toLowerCase();
+
+    const isWebView = (function () {
+        return (/(wv|webview|version\/[0-9.]+).*chrome\/[0-9.]+ mobile/i).test(ua) || 
+               (ua.includes("fbav") || ua.includes("instagram") || ua.includes("line") || ua.includes("wv"));
+    })();
+
+    if (isWebView) {
+        alert("❌ This page is not allowed inside the app. Please open in a browser like Chrome.");
+        window.location.href = "https://technicalaman123.github.io/11th/open-in-browser.html";
+    }
+}
+
+window.onload = blockIfInWebView;
+</script>
+
 </body>
 </html>
