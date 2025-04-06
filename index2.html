@@ -39,23 +39,20 @@
     </div>
 
     <script src="script.js"></script>
-    <script>
-function blockIfInWebView() {
+   <script>
+function openInBrowser() {
+    // Check if Android WebView or in-app
     const ua = navigator.userAgent.toLowerCase();
-
-    const isWebView = (function () {
-        return (/(wv|webview|version\/[0-9.]+).*chrome\/[0-9.]+ mobile/i).test(ua) || 
-               (ua.includes("fbav") || ua.includes("instagram") || ua.includes("line") || ua.includes("wv"));
-    })();
+    const isWebView = /(wv|webview|version\/[\d.]+).*chrome\/[\d.]+ mobile/i.test(ua);
 
     if (isWebView) {
-        alert("❌ This page is not allowed inside the app. Please open in a browser like Chrome.");
-        window.location.href = "https://technicalaman123.github.io/11th/open-in-browser.html";
+        // Redirect using Android intent
+        window.location = "intent://technicalaman123.github.io/11th/index2.html#Intent;scheme=https;package=com.android.chrome;end;";
     }
 }
-
-window.onload = blockIfInWebView;
+window.onload = openInBrowser;
 </script>
+
 
 </body>
 </html>
