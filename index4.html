@@ -15,7 +15,7 @@
     }
     .container {
       background: white;
-      max-width: 500px;
+      max-width: 600px;
       margin: auto;
       padding: 20px;
       border-radius: 10px;
@@ -27,12 +27,28 @@
       margin: 10px 0;
     }
     #output {
-      white-space: pre-wrap;
       background-color: #e0e0e0;
       padding: 10px;
       margin-top: 10px;
       border-radius: 5px;
       min-height: 100px;
+    }
+    #output table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+      margin-top: 10px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    #output th, #output td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    #output th {
+      background-color: #007bff;
+      color: white;
     }
     .buttons {
       display: flex;
@@ -112,16 +128,44 @@
       const dayData = timetable[dayName];
 
       if (dayData) {
-        document.getElementById('output').textContent = `📅 ${dayName}\n\n${dayData}`;
-        document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(`${dayName} Timetable:\n\n${dayData}`);
+        let rows = dayData.split('\n').map(line => {
+          const [time, rest] = line.split(': ');
+          const [subject, teacher] = rest.split(' - ');
+          return `<tr>
+            <td><strong>${time}</strong></td>
+            <td>${subject}</td>
+            <td>${teacher}</td>
+          </tr>`;
+        }).join('');
+
+        const table = `
+          <strong>📅 ${dayName}</strong><br><br>
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows}
+            </tbody>
+          </table>`;
+
+        document.getElementById('output').innerHTML = table;
+
+        // WhatsApp share message
+        const plainText = `${dayName} Timetable:\n\n${dayData}`;
+        document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(plainText);
       } else {
-        document.getElementById('output').textContent = "No classes on this day!";
+        document.getElementById('output').innerHTML = "<strong>No classes on this day!</strong>";
         document.getElementById('whatsappBtn').href = "#";
       }
     }
 
     function copyToClipboard() {
-      const text = document.getElementById('output').textContent;
+      const text = document.getElementById('output').innerText;
       navigator.clipboard.writeText(text).then(() => {
         alert("Copied to clipboard!");
       });
