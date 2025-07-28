@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Timetable Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f1f1f1;
+    }
+    h2 {
+      text-align: center;
+    }
+    .container {
+      background: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    input[type="date"], button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #output {
+      white-space: pre-wrap;
+      background-color: #e0e0e0;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      min-height: 100px;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .buttons button, .buttons a {
+      flex: 1;
+      padding: 10px;
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .buttons button:hover, .buttons a:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Daily College Timetable</h2>
+    <input type="date" id="dateInput" />
+    <button onclick="showTimetable()">Done</button>
+    <div id="output"></div>
+    <div class="buttons">
+      <button onclick="copyToClipboard()">📋 Copy</button>
+      <a id="whatsappBtn" href="#" target="_blank">📤 Share via WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    const timetable = {
+      Monday: `8:00 - 8:45: English - Mrs. Anita
+8:45 - 9:30: Odia - Mr. Ranjan
+9:30 - 10:15: Statistics - Mrs. Sushree
+10:15 - 11:00: Accountancy - Mr. Dinesh
+11:00 - 11:45: Fundamentals of Entrepreneurship - Mrs. Lipsa`,
+
+      Tuesday: `8:00 - 8:45: Odia - Mr. Ranjan
+8:45 - 9:30: Accountancy - Mr. Dinesh
+9:30 - 10:15: Business Studies - Mrs. Ananya
+10:15 - 11:00: English - Mrs. Anita
+11:00 - 11:45: Statistics - Mrs. Sushree`,
+
+      Wednesday: `8:00 - 8:45: Business Studies - Mrs. Ananya
+8:45 - 9:30: Statistics - Mrs. Sushree
+9:30 - 10:15: English - Mrs. Anita
+10:15 - 11:00: Accountancy - Mr. Dinesh
+11:00 - 11:45: Fundamentals of Entrepreneurship - Mrs. Lipsa`,
+
+      Thursday: `8:00 - 8:45: English - Mrs. Anita
+8:45 - 9:30: Odia - Mr. Ranjan
+9:30 - 10:15: Statistics - Mrs. Sushree
+10:15 - 11:00: Accountancy - Mr. Dinesh
+11:00 - 11:45: Fundamentals of Entrepreneurship - Mrs. Lipsa`,
+
+      Friday: `8:00 - 8:45: Business Studies - Mrs. Ananya
+8:45 - 9:30: English - Mrs. Anita
+9:30 - 10:15: Odia - Mr. Ranjan
+10:15 - 11:00: Accountancy - Mr. Dinesh
+11:00 - 11:45: Statistics - Mrs. Sushree`,
+
+      Saturday: `8:00 - 8:45: English - Mrs. Anita
+8:45 - 9:30: Business Studies - Mrs. Ananya
+9:30 - 10:15: Accountancy - Mr. Dinesh
+10:15 - 11:00: Fundamentals of Entrepreneurship - Mrs. Lipsa
+11:00 - 11:45: Odia - Mr. Ranjan`
+    };
+
+    function showTimetable() {
+      const date = new Date(document.getElementById('dateInput').value);
+      const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+      const dayData = timetable[dayName];
+
+      if (dayData) {
+        document.getElementById('output').textContent = `📅 ${dayName}\n\n${dayData}`;
+        document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(`${dayName} Timetable:\n\n${dayData}`);
+      } else {
+        document.getElementById('output').textContent = "No classes on this day!";
+        document.getElementById('whatsappBtn').href = "#";
+      }
+    }
+
+    function copyToClipboard() {
+      const text = document.getElementById('output').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
