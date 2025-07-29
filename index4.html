@@ -83,43 +83,45 @@
     </div>
   </div>
 
-  <sconst timetable = {
-  Monday: `10:00 - 10:45: Statistics  - Smiti Madam
+  <script>
+    const timetable = {
+      Monday: `10:00 - 10:45: Statistics  - Smiti Madam
 10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
 11:30 - 12:15: MIL O/H - odia/hindi
 12:15 - 1:00: Accountancy - Sanjay sir
 1:00 - 1:45: Business Studies - Faizahn sir`,
 
-  Tuesday: `10:00 - 10:45: Statistics - Smiti Madam
+      Tuesday: `10:00 - 10:45: Statistics - Smiti Madam
 10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
 11:30 - 12:15: Accountancy - Sanjay sir
 12:15 - 1:00: English - Simantika Madam
 1:00 - 1:45: Business Studies - Faizahn sir`,
 
-  Wednesday: `10:00 - 10:45: Statistics - Smiti Madam
+      Wednesday: `10:00 - 10:45: Statistics - Smiti Madam
 10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
 11:30 - 12:15: MIL O/H - odia/hindi
 12:15 - 1:00: English - Simantika Madam
 1:00 - 1:45: Business Studies - Faizahn sir`,
 
-  Thursday: `10:00 - 10:45: Statistics - Smiti Madam
+      Thursday: `10:00 - 10:45: Statistics - Smiti Madam
 10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
 11:30 - 12:15: Computer - Computer sir
 12:15 - 1:00: Accountancy - Sanjay sir
 1:00 - 1:45: Business Studies - Faizahn sir`,
 
-  Friday: `10:00 - 10:45: Yoga - Yoga
+      Friday: `10:00 - 10:45: Yoga - Yoga
 10:45 - 11:30: English - Simantika Madam
 11:30 - 12:15: MIL O/H - odia/hindi
 12:15 - 1:00: Fundamentals of Entrepreneurship - Sidhant sir
 1:00 - 1:45: Business Studies - Faizahn sir`,
 
-  Saturday: `10:00 - 10:45: Yoga - Yoga
+      Saturday: `10:00 - 10:45: Yoga - Yoga
 10:45 - 11:30: English - Simantika Madam
 11:30 - 12:15: MIL O/H - odia/hindi
 12:15 - 1:00: Statistics - Smiti Madam
 1:00 - 1:45: Accountancy - Sanjay sir`
-}; // <-- Yeh missing tha
+    };
+
     function showTimetable() {
       const date = new Date(document.getElementById('dateInput').value);
       const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
@@ -153,7 +155,6 @@
 
         document.getElementById('output').innerHTML = table;
 
-        // WhatsApp share message
         const plainText = `${dayName} Timetable:\n\n${dayData}`;
         document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(plainText);
       } else {
