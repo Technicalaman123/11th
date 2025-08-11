@@ -41,7 +41,18 @@
     <script src="script.js"></script>
    <script>
 
+function openInBrowser() {
+    // Check if Android WebView or in-app
+    const ua = navigator.userAgent.toLowerCase();
+    const isWebView = /(wv|webview|version\/[\d.]+).*chrome\/[\d.]+ mobile/i.test(ua);
 
+    if (isWebView) {
+        // Redirect using Android intent
+        window.location = "intent://technicalaman123.github.io/11th/index2.html#Intent;scheme=https;package=com.android.chrome;end;";
+    }
+}
+window.onload = openInBrowser;
+</script>
 
 </body>
 </html>
