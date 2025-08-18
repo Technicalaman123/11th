@@ -85,42 +85,43 @@
 
   <script>
     const timetable = {
-      Monday: `10:00 - 10:45: Statistics  - Smiti Madam
-10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
-11:30 - 12:15: MIL O/H - odia/hindi
-12:15 - 1:00: Accountancy - Sanjay sir
-1:00 - 1:45: Business Studies - Faizahn sir`,
+      Monday: `10:00 - 10:45: Statistics - Smiti Madam
+10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant Sir
+11:30 - 12:15: MIL O/H - Odia/Hindi
+12:15 - 1:00: Accountancy - Sanjay Sir
+1:00 - 1:45: Business Studies - Faizahn Sir`,
 
       Tuesday: `10:00 - 10:45: Statistics - Smiti Madam
-10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
-11:30 - 12:15: Accountancy - Sanjay sir
+10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant Sir
+11:30 - 12:15: Accountancy - Sanjay Sir
 12:15 - 1:00: English - Simantika Madam
-1:00 - 1:45: Business Studies - Faizahn sir`,
+1:00 - 1:45: Business Studies - Faizahn Sir`,
 
       Wednesday: `10:00 - 10:45: Statistics - Smiti Madam
-10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
-11:30 - 12:15: MIL O/H - odia/hindi
+10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant Sir
+11:30 - 12:15: MIL O/H - Odia/Hindi
 12:15 - 1:00: English - Simantika Madam
-1:00 - 1:45: Business Studies - Faizahn sir`,
+1:00 - 1:45: Business Studies - Faizahn Sir`,
 
       Thursday: `10:00 - 10:45: Statistics - Smiti Madam
-10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant sir
-11:30 - 12:15:  Accountancy - Sanjay sir
-12:15 - 1:00: Business Studies - Faizahn 
-1:00 - 1:45:  blank  - blank`,
+10:45 - 11:30: Fundamentals of Entrepreneurship - Sidhant Sir
+11:30 - 12:15: Accountancy - Sanjay Sir
+12:15 - 1:00: Business Studies - Faizahn Sir
+1:00 - 1:45: Blank - Blank`,
 
       Friday: `10:00 - 10:45: Yoga - Yoga
 10:45 - 11:30: English - Simantika Madam
-11:30 - 12:15: MIL O/H - odia/hindi
-12:15 - 1:00: Accountancy - Sanjay sir`
-1:00 - 1:45: Business Studies - Faizahn sir`,
+11:30 - 12:15: MIL O/H - Odia/Hindi
+12:15 - 1:00: Accountancy - Sanjay Sir
+1:00 - 1:45: Business Studies - Faizahn Sir`,
 
       Saturday: `10:00 - 10:45: Yoga - Yoga
 10:45 - 11:30: English - Simantika Madam
-11:30 - 12:15: MIL O/H - odia/hindi
-12:15 - 1:00: blank - blank
-1:00 - 1:45: Business Studies - Faizahn sir`,
+11:30 - 12:15: MIL O/H - Odia/Hindi
+12:15 - 1:00: Blank - Blank
+1:00 - 1:45: Business Studies - Faizahn Sir`,
 
+      Sunday: `Holiday - No Classes`
     };
 
     function showTimetable() {
@@ -129,35 +130,38 @@
       const dayData = timetable[dayName];
 
       if (dayData) {
-        let rows = dayData.split('\n').map(line => {
-          const [time, rest] = line.split(': ');
-          const [subject, teacher] = rest.split(' - ');
-          return `<tr>
-            <td><strong>${time}</strong></td>
-            <td>${subject}</td>
-            <td>${teacher}</td>
-          </tr>`;
-        }).join('');
+        if (dayData.includes("Holiday")) {
+          document.getElementById('output').innerHTML = `<strong>📅 ${dayName}</strong><br><br><em>${dayData}</em>`;
+          document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(`${dayName}: ${dayData}`);
+        } else {
+          let rows = dayData.split('\n').map(line => {
+            const [time, rest] = line.split(': ');
+            const [subject, teacher] = rest.split(' - ');
+            return `<tr>
+              <td><strong>${time}</strong></td>
+              <td>${subject}</td>
+              <td>${teacher}</td>
+            </tr>`;
+          }).join('');
 
-        const table = `
-          <strong>📅 ${dayName}</strong><br><br>
-          <table>
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Subject</th>
-                <th>Teacher</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows}
-            </tbody>
-          </table>`;
+          const table = `
+            <strong>📅 ${dayName}</strong><br><br>
+            <table>
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Subject</th>
+                  <th>Teacher</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rows}
+              </tbody>
+            </table>`;
 
-        document.getElementById('output').innerHTML = table;
-
-        const plainText = `${dayName} Timetable:\n\n${dayData}`;
-        document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(plainText);
+          document.getElementById('output').innerHTML = table;
+          document.getElementById('whatsappBtn').href = "https://wa.me/?text=" + encodeURIComponent(`${dayName} Timetable:\n\n${dayData}`);
+        }
       } else {
         document.getElementById('output').innerHTML = "<strong>No classes on this day!</strong>";
         document.getElementById('whatsappBtn').href = "#";
