@@ -1,58 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>12th Attendence (Date 00/00/2025) </title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12th Attendance (Date 00/00/2025)</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>HIRAKUD, HIGHER SECONDARY SCHOOL, HIRAKUD</h1>
-        <div class="input-container">
-            <label for="class">Class:</label>
-            <input type="text" id="class" placeholder="12th (Commerce)">
-            <label for="date">Date:</label>
-            <input type="date" id="date">
-        </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>SR. No</th>
-                    <th>Student Name</th>
-                    <th>Roll No.</th>
-                    
-                </tr>
-            </thead>
-            <tbody id="studentTable">
-                <!-- Student rows will be added here -->
-            </tbody>
-        
+  <div class="container">
+    <h1>HIRAKUD, HIGHER SECONDARY SCHOOL, HIRAKUD</h1>
 
-        </table>
-        <button id="addRow">Add Student</button>
-        <div class="total">
-            Total Students: <span id="totalStudents">0</span>
-            <button id="doneButton">Done</button>
-
-        </div>
+    <!-- Input -->
+    <div class="input-container">
+      <label for="class">Class:</label>
+      <input type="text" id="class" placeholder="12th (Commerce)">
+      <label for="date">Date:</label>
+      <input type="date" id="date">
     </div>
 
-    <script src="script.js"></script>
-   <script>
+    <!-- Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>SR. No</th>
+          <th>Student Name</th>
+          <th>Roll No.</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="studentTable"></tbody>
+    </table>
 
-function openInBrowser() {
-    // Check if Android WebView or in-app
-    const ua = navigator.userAgent.toLowerCase();
-    const isWebView = /(wv|webview|version\/[\d.]+).*chrome\/[\d.]+ mobile/i.test(ua);
+    <!-- Buttons -->
+    <div class="buttons">
+      <button id="addRow">Add Student</button>
+      <button id="doneButton">Done</button>
+      <button id="saveButton">Save</button>
+      <button id="restoreButton">Restore</button>
+      <button id="printButton">Print</button>
+      <button id="exportCsvButton">Export CSV</button>
+      <button id="exportPdfButton">Export PDF</button>
+    </div>
 
-    if (isWebView) {
-        // Redirect using Android intent
-        window.location = "intent://technicalaman123.github.io/11th/index2.html#Intent;scheme=https;package=com.android.chrome;end;";
-    }
-}
-window.onload = openInBrowser;
-</script>
+    <!-- Bulk Roll Input -->
+    <div style="margin-top:20px;">
+      <label for="bulkRollInput"><b>Paste Roll Numbers:</b></label><br>
+      <textarea id="bulkRollInput" rows="3" style="width:100%; margin-top:5px;"
+        placeholder="Ex: 12 23 45 102"></textarea>
+      <br>
+      <button id="bulkAddButton" 
+        style="background:green;color:white;padding:6px 15px;border:none;border-radius:5px;cursor:pointer;">
+        OK
+      </button>
+    </div>
 
+    <!-- Dialpad -->
+    <div class="dialpad">
+      <input type="text" id="dialInput" placeholder="Enter Roll No." readonly>
+      <div class="keys">
+        <button onclick="dialPress('1')">1</button>
+        <button onclick="dialPress('2')">2</button>
+        <button onclick="dialPress('3')">3</button>
+        <button onclick="dialPress('4')">4</button>
+        <button onclick="dialPress('5')">5</button>
+        <button onclick="dialPress('6')">6</button>
+        <button onclick="dialPress('7')">7</button>
+        <button onclick="dialPress('8')">8</button>
+        <button onclick="dialPress('9')">9</button>
+        <button onclick="dialPress('0')">0</button>
+        <button onclick="dialDelete()">⌫</button>
+        <button onclick="dialNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
